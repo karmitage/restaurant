@@ -10,8 +10,8 @@
     integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
     integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
-  </head>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+</head>
 
 <body>
 
@@ -22,33 +22,31 @@
     <hr class="my-4">
     <h3>Current Reservations and Waiting List</h3>
     <!-- BUTTONS START -->
-    <a href="reserve.html" > <button type="button" id="reservationButton" class="btn btn-danger"><i class="fas fa-table"></i> Make
-      Reservation</button></a>
-    <a href="home.html" > <button type="button" id="homeButton" class="btn btn-secondary"><i class="fas fa-home"></i></button></a>
+    <a href="/reserve"> <button type="button" id="reservationButton" class="btn btn-danger"><i
+          class="fas fa-table"></i> Make
+        Reservation</button></a>
+    <a href="/"> <button type="button" id="homeButton" class="btn btn-secondary"><i
+          class="fas fa-home"></i></button></a>
     <!-- BUTTONS END -->
   </div>
   <!-- MAIN JUMBOTRON END -->
 
-<!-- CARD CURRENT RESERVATIONS LIST END -->
+  <!-- CARD CURRENT RESERVATIONS LIST END -->
   <div class="card">
     <div class="card-header">
       Current Reservations
     </div>
     <div class="card-body">
       <div class="card">
-          <div class="card-header">
-            Table Number # <span id="tableNumber"> ? </span>
-            </div>
-        <div class="card-body" id="recent-member">
-          <h4 id="id_current">ID</h2>
-            <h4 id="name_current">NAME</h2>
-              <h4 id="email_current">EMAIL</h4>
-              <h4 id="phone_current">PHONE</h4>
+        <div class="card-header">
+          Table Number # <span id="tableNumber"> ? </span>
+        </div>
+        <div class="card-body" id="tables">
         </div>
       </div>
     </div>
   </div>
-<!-- CARD CURRENT RESERVATIONS LIST END -->
+  <!-- CARD CURRENT RESERVATIONS LIST END -->
 
 
   <!-- CARD WAITING LIST START -->
@@ -58,23 +56,19 @@
     </div>
     <div class="card-body">
       <div class="card">
-        <div class="card-body" id="recent-member">
-          <h4 id="id_waitlist">ID</h2>
-            <h4 id="name_waitlist">NAME</h2>
-              <h4 id="email_waitlist">EMAIL</h4>
-              <h4 id="phone_waitlist">PHONE</h4>
+        <div class="card-body" id="waitlist">
         </div>
       </div>
     </div>
   </div>
   <!-- CARD WAITING LIST END -->
 
-<hr>
+  <hr>
 
   <!-- LINKS START -->
   <h6>Control Panel</h6>
-  <a id="clearTable" href="#">Clear Table</a> |<a id="APItable" href="#">API Table Link</a> | <a id="APIWait"
-    href="#">API Wait List</a>
+  <a id="clearTable" href="#">Clear Table</a> |<a id="APItable" href="/api/tables">API Table Link</a> | <a id="APIWait"
+    href="/api/waitlist">API Wait List</a>
   <!-- LINKS END -->
 
 
@@ -82,27 +76,31 @@
 
 <script type="text/javascript">
   $.get("api/tables", function (data) {
+    if (data.length > 1) {
       for (var i = 0; i < data.length; i++) {
-          append("#tables", data[i], i)
+        append("#tables", data[i], i)
       }
+    }
   })
 
   $.get("api/waitlist", function (data) {
+    if (data.length > 1) {
       for (var i = 0; i < data.length; i++) {
-          append("#waitlist", data[i], i)
+        append("#waitlist", data[i], i)
       }
+    }
   })
 
   function append(section, data, i) {
-      console.log(data);
-      var tableNumber = i + 1;
-      var listGroupItem = $("<li class='list-group-item'>");
-      listGroupItem.append($("<h2>").text(`Table #${tableNumber}`));
-      listGroupItem.append($("<h3>").text("Name: " + data.name));
-      listGroupItem.append($("<h3>").text("Phone: " + data.phone));
-      listGroupItem.append($("<h3>").text("Email: " + data.email));
-      listGroupItem.append($("<h3>").text("ID: " + data.uniqueID));
-      $(section).append(listGroupItem);
+    console.log(data);
+    var tableNumber = i + 1;
+    var listGroupItem = $("<li class='list-group-item'>");
+    listGroupItem.append($("<h2>").text(`Table #${tableNumber}`));
+    listGroupItem.append($("<h3>").text("Name: " + data.name));
+    listGroupItem.append($("<h3>").text("Phone: " + data.phone));
+    listGroupItem.append($("<h3>").text("Email: " + data.email));
+    listGroupItem.append($("<h3>").text("ID: " + data.uniqueID));
+    $(section).append(listGroupItem);
   }
 
 </script>

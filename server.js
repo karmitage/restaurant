@@ -46,17 +46,12 @@ app.post("/api/tables", function (req, res) {
 
     console.log(newReservation);
 
-    tables.push(newReservation);
-
-    res.json(newReservation);
-})
-
-app.post("/api/waitlist", function (req, res) {
-    var newReservation = req.body;
-
-    console.log(newReservation);
-
-    waitlist.push(newReservation);
+    if (tables.length < 5) {
+        tables.push(newReservation);
+    }
+    else {
+        waitlist.push(newReservation);
+    }
 
     res.json(newReservation);
 })
