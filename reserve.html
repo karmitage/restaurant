@@ -55,27 +55,33 @@
         <button type="submit" class="btn btn-primary">Submit</button>
       </form>
       <br>
-
       </div>
-
   <!-- FORM END -->
 
-  
 <br>
-
-
   <!-- LINKS START -->
   <a id="APItable" href="#">API Table Link</a> | <a id="APIWait" href="#">API Wait List</a>
   <!-- LINKS END -->
-
-
-
-
-
-
-
-
-
 </body>
+
+<script type="text/javascript">
+
+  $("#add-btn").on("click", function (event) {
+    event.preventDefault();
+    var newReservation = {
+      name: $("#res-name").val().trim(),
+      phone: $("#res-phone").val().trim(),
+      email: $("#res-email").val().trim(),
+      uniqueID: $("#res-unique-id").val().trim()
+    };
+
+    if (available()) {
+      $.post("/api/characters", newReservation)
+        .then(function (data) {
+          alert("Adding reservation...");
+        });
+    }
+  });
+</script>
 
 </html>
