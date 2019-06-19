@@ -18,24 +18,51 @@
 
   <!-- MAIN JUMBOTRON START -->
   <div class="jumbotron">
-    <h1 class="display-4"><i class="fas fa-fire-alt"></i> Hot Restaurant</h1>
-    <!-- JAVASCRIPT FOR TABLES LEFT START -->
-    <p class="lead">We only have <span id="seatsLeft"> ? </span>tables! Book your seat before they all are gone!</p>
-    <!-- JAVASCRIPT FOR TABLES LEFT END -->
-    <hr class="my-4">
-
+      <h1 class="display-4"><i class="fas fa-fire-alt"></i> Hot Restaurant</h1>
+      <hr class="my-4">
+      <h3>Current Reservations and Waiting List</h3>
+      <!-- BUTTONS START -->
+      <button type="button" id="reservationButton" class="btn btn-primary"><i class="fas fa-table"></i> View Table</button>
+      <button type="button" id="homeButton" class="btn btn-secondary"><i class="fas fa-home"></i></button>
+      <!-- BUTTONS END -->
+    </div>
     <!-- MAIN JUMBOTRON END -->
 
 
+  <!-- FORM START -->
 
-    <!-- BUTTONS START -->
-    <button type="button" id="reservationButton" class="btn btn-primary"><i class="fas fa-home"></i> Make
-      Reservations</button>
-    <button type="button" id="waitlistButton" class="btn btn-danger"><i class="fas fa-table"></i> Waitlist</button>
-    <!-- BUTTONS END -->
+  <div class="card">
+      <div class="card-header">
+        Table Reservation
+      </div>
+  <form>
+          <div class="form-group col-md-12">
+            <label for="Name">Name</label>
+            <input type="text" class="form-control" id="res-name" placeholder="Name">
+          </div>
+          <div class="form-group col-md-12">
+              <label for="Phone Number">Phone Number</label>
+              <input type="text" class="form-control" id="res-phone" placeholder="Phone Number">
+          </div>
+          <div class="form-group col-md-12">
+                <label for="Email">Email</label>
+                <input type="text" class="form-control" id="res-email" placeholder="Email">
+         </div>
+        <div class="form-group col-md-12">
+                  <label for="uniqueId">Name</label>
+                  <input type="text" class="form-control" id="res-unique-id" placeholder="Unique Id">
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+      </form>
+      <br>
 
+      </div>
 
-  </div>
+  <!-- FORM END -->
+
+  
+<br>
+
 
   <!-- LINKS START -->
   <a id="APItable" href="#">API Table Link</a> | <a id="APIWait" href="#">API Wait List</a>
