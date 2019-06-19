@@ -76,7 +76,7 @@
 
 <script type="text/javascript">
   $.get("api/tables", function (data) {
-    if (data.length > 1) {
+    if (data.length > 0) {
       for (var i = 0; i < data.length; i++) {
         append("#tables", data[i], i)
       }
@@ -84,7 +84,7 @@
   })
 
   $.get("api/waitlist", function (data) {
-    if (data.length > 1) {
+    if (data.length > 0) {
       for (var i = 0; i < data.length; i++) {
         append("#waitlist", data[i], i)
       }
