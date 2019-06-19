@@ -22,8 +22,8 @@
       <hr class="my-4">
       <h3>Current Reservations and Waiting List</h3>
       <!-- BUTTONS START -->
-      <button type="button" id="reservationButton" class="btn btn-primary"><i class="fas fa-table"></i> View Table</button>
-      <button type="button" id="homeButton" class="btn btn-secondary"><i class="fas fa-home"></i></button>
+      <a href="tables.html" > <button  type="button" id="reservationButton" class="btn btn-primary"><i class="fas fa-table"></i> View Table</button> </a>
+      <a  href="home.html" > <button type="button" id="homeButton" class="btn btn-secondary"><i class="fas fa-home"></i></button></a>
       <!-- BUTTONS END -->
     </div>
     <!-- MAIN JUMBOTRON END -->
@@ -65,7 +65,6 @@
 </body>
 
 <script type="text/javascript">
-
   $("#add-btn").on("click", function (event) {
     event.preventDefault();
     var newReservation = {
@@ -74,14 +73,28 @@
       email: $("#res-email").val().trim(),
       uniqueID: $("#res-unique-id").val().trim()
     };
-
     if (available()) {
-      $.post("/api/characters", newReservation)
+      $.post("/api/tables", newReservation)
         .then(function (data) {
           alert("Adding reservation...");
         });
+    } else {
+      $.post("/api/waitlist", newReservation)
+        .then(function (data) {
+          alert("Adding to waitlist...");
+        });
     }
   });
+  function available() {
+    app.get("/api/tables", function (req, res) {
+      if (res.json(tables).length >= 5) {
+        return false;
+      }
+      else {
+        return true;
+      }
+    });
+  }
 </script>
 
 </html>

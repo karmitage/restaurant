@@ -22,9 +22,9 @@
     <hr class="my-4">
     <h3>Current Reservations and Waiting List</h3>
     <!-- BUTTONS START -->
-    <button type="button" id="reservationButton" class="btn btn-danger"><i class="fas fa-table"></i> Make
-      Reservation</button>
-    <button type="button" id="homeButton" class="btn btn-secondary"><i class="fas fa-home"></i></button>
+    <a href="reserve.html" > <button type="button" id="reservationButton" class="btn btn-danger"><i class="fas fa-table"></i> Make
+      Reservation</button></a>
+    <a href="home.html" > <button type="button" id="homeButton" class="btn btn-secondary"><i class="fas fa-home"></i></button></a>
     <!-- BUTTONS END -->
   </div>
   <!-- MAIN JUMBOTRON END -->
@@ -79,5 +79,32 @@
 
 
 </body>
+
+<script type="text/javascript">
+  $.get("api/tables", function (data) {
+      for (var i = 0; i < data.length; i++) {
+          append("#tables", data[i], i)
+      }
+  })
+
+  $.get("api/waitlist", function (data) {
+      for (var i = 0; i < data.length; i++) {
+          append("#waitlist", data[i], i)
+      }
+  })
+
+  function append(section, data, i) {
+      console.log(data);
+      var tableNumber = i + 1;
+      var listGroupItem = $("<li class='list-group-item'>");
+      listGroupItem.append($("<h2>").text(`Table #${tableNumber}`));
+      listGroupItem.append($("<h3>").text("Name: " + data.name));
+      listGroupItem.append($("<h3>").text("Phone: " + data.phone));
+      listGroupItem.append($("<h3>").text("Email: " + data.email));
+      listGroupItem.append($("<h3>").text("ID: " + data.uniqueID));
+      $(section).append(listGroupItem);
+  }
+
+</script>
 
 </html>
